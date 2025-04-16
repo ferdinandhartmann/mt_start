@@ -57,7 +57,7 @@
   </link>
 
   <!-- 車体リンク <-> 左車輪リンク をつなげるジョイント -->
-  <joint name="front_wheel_joint" type="continuous">
+  <joint name="left_wheel_joint" type="continuous">
     <parent link="base_link"/>
     <child link="left_wheel_link"/>
     <origin xyz="0.0 -0.1625 -0.05" rpy="0 0 0"/>

@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<robot name="maze" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!--
+    Beispiel-URDF für ein Maze (Labyrinth) aus Blöcken,
+    das in PyBullet verwendet werden kann.
+    Alle Wände werden in einem einzigen Link definiert.
+    Die Abmessungen und Positionen kannst du beliebig anpassen.
+  -->
+
+  <!-- Ein Link mit Nullmasse und Nullträgheit, da es statisch ist -->
+  <link name="maze_link">
+    <inertial>
+      <origin xyz="0 0 0"/>
+      <mass value="0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+
+    <!-- ======================
+         Äußere Umrandung
+         ====================== -->
+    <!-- Unten -->
+    <collision name="wall_bottom_collision">
+      <origin xyz="0 -5 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="10 0.2 1"/>
+      </geometry>
+    </collision>
+    <visual name="wall_bottom_visual">
+      <origin xyz="0 -5 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="10 0.2 1"/>
+      </geometry>
+    </visual>
+
+    <!-- Oben -->
+    <collision name="wall_top_collision">
+      <origin xyz="0 5 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="10 0.2 1"/>
+      </geometry>
+    </collision>
+    <visual name="wall_top_visual">
+      <origin xyz="0 5 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="10 0.2 1"/>
+      </geometry>
+    </visual>
+
+    <!-- Links -->
+    <collision name="wall_left_collision">
+      <origin xyz="-5 0 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.2 10 1"/>
+      </geometry>
+    </collision>
+    <visual name="wall_left_visual">
+      <origin xyz="-5 0 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.2 10 1"/>
+      </geometry>
+    </visual>
+
+    <!-- Rechts -->
+    <collision name="wall_right_collision">
+      <origin xyz="5 0 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.2 10 1"/>
+      </geometry>
+    </collision>
+    <visual name="wall_right_visual">
+      <origin xyz="5 0 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.2 10 1"/>
+      </geometry>
+    </visual>
+
+    <!-- ======================
+         Innere Wände
+         ====================== -->
+    <!-- Horizontaler Block 1 -->
+    <collision name="inner_wall_h1_collision">
+      <origin xyz="0 3 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="8 0.2 1"/>
+      </geometry>
+    </collision>
+    <visual name="inner_wall_h1_visual">
+      <origin xyz="0 3 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="8 0.2 1"/>
+      </geometry>
+    </visual>
+
+    <!-- Horizontaler Block 2 -->
+    <collision name="inner_wall_h2_collision">
+      <origin xyz="0 1 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="8 0.2 1"/>
+      </geometry>
+    </collision>
+    <visual name="inner_wall_h2_visual">
+      <origin xyz="0 1 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="8 0.2 1"/>
+      </geometry>
+    </visual>
+
+    <!-- Horizontaler Block 3 -->
+    <collision name="inner_wall_h3_collision">
+      <origin xyz="0 -1 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="8 0.2 1"/>
+      </geometry>
+    </collision>
+    <visual name="inner_wall_h3_visual">
+      <origin xyz="0 -1 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="8 0.2 1"/>
+      </geometry>
+    </visual>
+
+    <!-- Horizontaler Block 4 -->
+    <collision name="inner_wall_h4_collision">
+      <origin xyz="0 -3 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="8 0.2 1"/>
+      </geometry>
+    </collision>
+    <visual name="inner_wall_h4_visual">
+      <origin xyz="0 -3 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="8 0.2 1"/>
+      </geometry>
+    </visual>
+
+    <!-- Vertikaler Block 1 -->
+    <collision name="inner_wall_v1_collision">
+      <origin xyz="2 2 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.2 2 1"/>
+      </geometry>
+    </collision>
+    <visual name="inner_wall_v1_visual">
+      <origin xyz="2 2 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.2 2 1"/>
+      </geometry>
+    </visual>
+
+    <!-- Vertikaler Block 2 -->
+    <collision name="inner_wall_v2_collision">
+      <origin xyz="-2 -2 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.2 2 1"/>
+      </geometry>
+    </collision>
+    <visual name="inner_wall_v2_visual">
+      <origin xyz="-2 -2 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.2 2 1"/>
+      </geometry>
+    </visual>
+
+  </link>
+
+  <!--
+    Optional kannst du noch einen "link" für den Boden definieren
+    oder du nutzt in PyBullet eine plane. Hier nur als Kommentar:
+    
+    <link name="floor_link">
+      ...
+    </link>
+  -->
+
+
+</robot>
