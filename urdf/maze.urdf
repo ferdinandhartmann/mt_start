@@ -82,13 +82,13 @@
     <collision name="inner_wall_h1_collision">
       <origin xyz="0 3 0.5" rpy="0 0 0"/>
       <geometry>
-        <box size="8 0.2 1"/>
+        <box size="6 0.2 1"/>
       </geometry>
     </collision>
     <visual name="inner_wall_h1_visual">
       <origin xyz="0 3 0.5" rpy="0 0 0"/>
       <geometry>
-        <box size="8 0.2 1"/>
+        <box size="6 0.2 1"/>
       </geometry>
     </visual>
 
@@ -96,13 +96,13 @@
     <collision name="inner_wall_h2_collision">
       <origin xyz="0 1 0.5" rpy="0 0 0"/>
       <geometry>
-        <box size="8 0.2 1"/>
+        <box size="6 0.2 1"/>
       </geometry>
     </collision>
     <visual name="inner_wall_h2_visual">
       <origin xyz="0 1 0.5" rpy="0 0 0"/>
       <geometry>
-        <box size="8 0.2 1"/>
+        <box size="6 0.2 1"/>
       </geometry>
     </visual>
 
@@ -110,13 +110,13 @@
     <collision name="inner_wall_h3_collision">
       <origin xyz="0 -1 0.5" rpy="0 0 0"/>
       <geometry>
-        <box size="8 0.2 1"/>
+        <box size="6 0.2 1"/>
       </geometry>
     </collision>
     <visual name="inner_wall_h3_visual">
       <origin xyz="0 -1 0.5" rpy="0 0 0"/>
       <geometry>
-        <box size="8 0.2 1"/>
+        <box size="6 0.2 1"/>
       </geometry>
     </visual>
 
@@ -124,13 +124,13 @@
     <collision name="inner_wall_h4_collision">
       <origin xyz="0 -3 0.5" rpy="0 0 0"/>
       <geometry>
-        <box size="8 0.2 1"/>
+        <box size="6 0.2 1"/>
       </geometry>
     </collision>
     <visual name="inner_wall_h4_visual">
       <origin xyz="0 -3 0.5" rpy="0 0 0"/>
       <geometry>
-        <box size="8 0.2 1"/>
+        <box size="6 0.2 1"/>
       </geometry>
     </visual>
 
