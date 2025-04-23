@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot name="wall">
+  <!-- Wall Link -->
+  <link name="wall_link">
+    <!-- Visual Shape -->
+    <visual>
+      <geometry>
+        <box size="1 0.1 2" /> <!-- 1x0.1x2 is the size of the wall -->
+      </geometry>
+      <material name="gray"/>
+    </visual>
+
+    <!-- Collision Shape -->
+    <collision>
+      <geometry>
+        <box size="1 0.1 2" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Joint (fixed) -->
+  <joint name="fixed_wall" type="fixed">
+    <parent link="world"/>
+    <child link="wall_link"/>
+    <origin xyz="0 0 1" rpy="0 0 0"/> <!-- Position of the wall -->
+  </joint>
+</robot>

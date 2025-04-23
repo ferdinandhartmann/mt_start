@@ -51,13 +51,13 @@
     <collision name="wall_left_collision">
       <origin xyz="-5 0 0.5" rpy="0 0 0"/>
       <geometry>
-        <box size="0.2 10 1"/>
+        <box size="0.2 8 1"/>
       </geometry>
     </collision>
     <visual name="wall_left_visual">
       <origin xyz="-5 0 0.5" rpy="0 0 0"/>
       <geometry>
-        <box size="0.2 10 1"/>
+        <box size="0.2 8 1"/>
       </geometry>
     </visual>
 
@@ -65,13 +65,13 @@
     <collision name="wall_right_collision">
       <origin xyz="5 0 0.5" rpy="0 0 0"/>
       <geometry>
-        <box size="0.2 10 1"/>
+        <box size="0.2 8 1"/>
       </geometry>
     </collision>
     <visual name="wall_right_visual">
       <origin xyz="5 0 0.5" rpy="0 0 0"/>
       <geometry>
-        <box size="0.2 10 1"/>
+        <box size="0.2 8 1"/>
       </geometry>
     </visual>
 
