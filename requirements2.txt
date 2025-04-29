@@ -1,0 +1,7 @@
+pip install torch
+pip install pybullet
+pip install stable-baselines3
+pip install gymnasium
+pip install tensorboard
+pip install stable-baselines3[extra]
+pip install matplotlib
