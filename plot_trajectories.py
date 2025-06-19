@@ -4,62 +4,59 @@ import numpy as np
 
 
 def parse_urdf_and_plot(urdf_path, trajectory_data_path):
-    # Parse the URDF file
     tree = ET.parse(urdf_path)
     root = tree.getroot()
 
     walls = []
 
-    # Loop through the URDF XML to find walls (both visual and collision)
-    for link in root.findall(".//link"):
-        for visual in link.findall("visual"):
-            # Default color is white if color is not found
-            rgba = (1.0, 1.0, 1.0, 1.0)
+    # Each visual element of the URDF describes one wall.  We read the box size
+    # from the ``size`` attribute and the position from the ``origin`` tag.  The
+    # original version of this script expected nested ``size`` and ``color``
+    # elements which do not exist in the provided URDF.  Because of that it
+    # always fell back to default values and the walls were drawn at the wrong
+    # position.  The code below correctly handles the URDF structure where the
+    # attributes are stored on the elements themselves.
+    for visual in root.findall(".//visual"):
+        # Default color
+        rgba = (1.0, 1.0, 1.0, 1.0)
 
-            # Get the color information
-            material = visual.find("material")
-            if material is not None:
-                color = material.find("color")
-                if color is not None:
-                    print(f"Found color: {color.text}")
-                    try:
-                        rgba = tuple(map(float, color.text.split()))
-                    except AttributeError:
-                        rgba = (1.0, 1.0, 1.0, 1.0)  # Default color: white
-                        print(f"Warning: Invalid color format for link '{link.get('name')}'")
-            else:
-                rgba = (1.0, 1.0, 1.0, 1.0)  # Default color: white
-                print(f"Warning: No material found for link '{link.get('name')}'")
+        material = visual.find("material")
+        if material is not None:
+            color_el = material.find("color")
+            if color_el is not None and color_el.get("rgba"):
+                try:
+                    rgba = tuple(map(float, color_el.get("rgba").split()))
+                except Exception:
+                    rgba = (1.0, 1.0, 1.0, 1.0)
 
-            # Get the geometry (box size)
-            geometry = visual.find("geometry")
-            if geometry is not None:
-                box = geometry.find("box")
-                if box is not None:
-                    size = box.find("size")
-                    if size is not None:
-                        size_values = tuple(map(float, size.text.split()))
-                    else:
-                        size_values = (1.0, 1.0, 1.0)  # Default size: 1x1x1
-                        print(f"Warning: No size found for box in link '{link.get('name')}'")
+        geometry = visual.find("geometry")
+        if geometry is None:
+            continue
+        box = geometry.find("box")
+        if box is None or not box.get("size"):
+            continue
 
-                    # Get the position (origin)
-                    origin = visual.find("origin")
-                    if origin is not None:
-                        xyz = tuple(map(float, origin.get("xyz", "0 0 0").split()))
-                        rpy = tuple(map(float, origin.get("rpy", "0 0 0").split()))
+        size_values = tuple(map(float, box.get("size").split()))
 
-                        # Handle horizontal and vertical walls
-                        if size_values[0] > size_values[1]:  # Horizontal wall
-                            x1 = xyz[0] - size_values[0] / 2
-                            x2 = xyz[0] + size_values[0] / 2
-                            y = xyz[1]  # Constant y value for horizontal wall
-                            walls.append({"x1": x1, "x2": x2, "y": y, "color": rgba})
-                        else:  # Vertical wall
-                            x = xyz[0]  # Constant x value for vertical wall
-                            y1 = xyz[1] - size_values[1] / 2
-                            y2 = xyz[1] + size_values[1] / 2
-                            walls.append({"x1": x, "y1": y1, "y2": y2, "color": rgba})
+        origin = visual.find("origin")
+        if origin is not None:
+            xyz = tuple(map(float, origin.get("xyz", "0 0 0").split()))
+        else:
+            xyz = (0.0, 0.0, 0.0)
+
+        # Determine orientation (horizontal or vertical) from the box
+        if size_values[0] >= size_values[1]:
+            # Horizontal wall (longer in x-direction)
+            x1 = xyz[0] - size_values[0] / 2
+            x2 = xyz[0] + size_values[0] / 2
+            y = xyz[1]
+            walls.append({"x1": x1, "x2": x2, "y": y, "color": rgba})
+        else:
+            # Vertical wall (longer in y-direction)
+            x = xyz[0]
+            y1 = xyz[1] - size_values[1] / 2
+            y2 = xyz[1] + size_values[1] / 2
+            walls.append({"x1": x, "y1": y1, "y2": y2, "color": rgba})
 
     # ovverride Walls because it doesnt work with the current URDF
 
@@ -122,6 +119,7 @@ def parse_urdf_and_plot(urdf_path, trajectory_data_path):
     plt.show()
 
 
-urdf_file = "/home/ferdinand/masterthesis/mt_start/urdf/maze_colored.urdf"  
-trajectory_file = "/home/ferdinand/masterthesis/mt_start/runs/sac_run_20250619-140215/trajectories.npy"  
+# Example file locations relative to the repository root
+urdf_file = "urdf/maze_colored.urdf"
+trajectory_file = "runs/sac_run_20250619-140215/trajectories.npy"
 parse_urdf_and_plot(urdf_file, trajectory_file)
