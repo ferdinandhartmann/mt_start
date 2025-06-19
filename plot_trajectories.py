@@ -4,11 +4,11 @@ import numpy as np
 
 
 def parse_urdf_and_plot(urdf_path, trajectory_data_path):
-    # Parse the URDF file
     tree = ET.parse(urdf_path)
     root = tree.getroot()
 
     walls = []
+
     # Each visual element of the URDF describes one wall.  We read the box size
     # from the ``size`` attribute and the position from the ``origin`` tag.  The
     # original version of this script expected nested ``size`` and ``color``
@@ -119,6 +119,7 @@ def parse_urdf_and_plot(urdf_path, trajectory_data_path):
     plt.show()
 
 
-urdf_file = "/home/ferdinand/masterthesis/mt_start/urdf/maze_colored.urdf"  
-trajectory_file = "/home/ferdinand/masterthesis/mt_start/runs/sac_run_20250619-140215/trajectories.npy"  
+# Example file locations relative to the repository root
+urdf_file = "urdf/maze_colored.urdf"
+trajectory_file = "runs/sac_run_20250619-140215/trajectories.npy"
 parse_urdf_and_plot(urdf_file, trajectory_file)
