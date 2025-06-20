@@ -6,10 +6,10 @@ This Agents.md file provides comprehensive guidance for OpenAI Codex and other A
 
 mobile_robot_rl_2_sac.ipynb is the main file I am working on. I am trying to implement rl with free energy principle and active inference on a simulated mobile robot.
 
-- `/oldruns`: models and tensorboard logs of old runs
-- `/runs`: models, tensorboard logs and trajectories of the current runs of mobile_robot_rl_2_sac.ipynb
-- `/public`: Static assets (OpenAI Codex should not modify these directly)
+- `/oldruns`: models and tensorboard logs of old runs, OpenAI Codex should not look at that
+- `/runs`: models, tensorboard logs and trajectories of the current runs of mobile_robot_rl_2_sac.ipynb, OpenAI Codex should not look at that
 - `/urdf`: urdf files of the robot and the maze
+- `/other_notebooks`: OpenAI Codex should not look at that
 
 ### General Conventions for Agents.md Implementation
 
