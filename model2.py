@@ -27,7 +27,7 @@ class PredictiveModel(nn.Module):
         image_x = torch.relu(self.conv1(image))
         image_x = torch.relu(self.conv2(image_x))
         image_x = torch.relu(self.conv3(image_x))
-        image_x = image_x.view(image_x.size(0), -1)
+        image_x = image_x.reshape(image_x.size(0), -1)
         image_x = torch.relu(self.fc_image(image_x))
 
         combined = torch.cat((state_x, image_x), dim=1)
@@ -74,7 +74,8 @@ class ActiveInferenceAgent:
 def compute_intrinsic_reward(agent, current_state, image, next_state, beta=0.01):
     predicted = agent.predict_next_state(current_state, image)
     free_energy = agent.compute_prediction_error(next_state, predicted)
-    return beta * free_energy
+    # Encourage minimization of free energy (prediction error)
+    return -beta * free_energy
 
 
 # === Initialisierung (einmalig zu Beginn deines Notebooks) ===
