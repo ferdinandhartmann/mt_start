@@ -1,0 +1,1 @@
+Without agent and without forcing to stop at the goal and the top left goal gives 10 reward and the bottom right goal gives 1 
